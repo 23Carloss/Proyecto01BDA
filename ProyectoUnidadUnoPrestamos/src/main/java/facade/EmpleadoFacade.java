@@ -10,9 +10,9 @@ import BOs.NegocioException;
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
 import java.util.List;
-import persistencia.ConexionBD;
+import Persistencia.ConexionBD;
 import persistencia.EmpleadoDAO;
-import persistencia.IConexionBD;
+import Persistencia.IConexionBD;
 import persistencia.IEmpleadoDAO;
 
 /**
