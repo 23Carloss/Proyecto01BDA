@@ -31,13 +31,18 @@ public class MenuJefe extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        btnCerrarSesion = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdministracion = new javax.swing.JMenu();
-        administrarSubordinado = new javax.swing.JMenuItem();
-        administrarEmpleado = new javax.swing.JMenuItem();
-        administrarPrestamos = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        administrarSubordinado = new javax.swing.JMenu();
+        agregarSubordinado = new javax.swing.JMenuItem();
+        eliminarSubordinado = new javax.swing.JMenuItem();
+        administrarEmpleados = new javax.swing.JMenu();
+        registrarEmpleado = new javax.swing.JMenuItem();
+        eliminarEmpleado = new javax.swing.JMenuItem();
+        modificarEmpleado = new javax.swing.JMenuItem();
+        mostrarEmpleados = new javax.swing.JMenuItem();
         menuPrestamo = new javax.swing.JMenu();
         realizarPrestamo = new javax.swing.JMenuItem();
 
@@ -45,40 +50,67 @@ public class MenuJefe extends javax.swing.JFrame {
 
         jLabel1.setText("Bienvenido!");
 
-        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        btnCerrarSesion.setText("Cerrar Sesion");
-        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCerrarSesionActionPerformed(evt);
-            }
-        });
+        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jButton1.setText("Cerrar Sesion");
 
         menuAdministracion.setText("Administracion");
+        menuAdministracion.add(jSeparator1);
 
         administrarSubordinado.setText("Administrar Subordinados");
-        administrarSubordinado.addActionListener(new java.awt.event.ActionListener() {
+
+        agregarSubordinado.setText("Agregar Subordinado");
+        agregarSubordinado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administrarSubordinadoActionPerformed(evt);
+                agregarSubordinadoActionPerformed(evt);
             }
         });
+        administrarSubordinado.add(agregarSubordinado);
+
+        eliminarSubordinado.setText("Eliminar Subordinado");
+        eliminarSubordinado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarSubordinadoActionPerformed(evt);
+            }
+        });
+        administrarSubordinado.add(eliminarSubordinado);
+
         menuAdministracion.add(administrarSubordinado);
 
-        administrarEmpleado.setText("Administrar Empleados");
-        administrarEmpleado.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administrarEmpleadoActionPerformed(evt);
-            }
-        });
-        menuAdministracion.add(administrarEmpleado);
+        administrarEmpleados.setText("Administrar Empleados");
 
-        administrarPrestamos.setText("Administrar Prestamos");
-        administrarPrestamos.addActionListener(new java.awt.event.ActionListener() {
+        registrarEmpleado.setText("Registrar Empleado");
+        registrarEmpleado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                administrarPrestamosActionPerformed(evt);
+                registrarEmpleadoActionPerformed(evt);
             }
         });
-        menuAdministracion.add(administrarPrestamos);
-        menuAdministracion.add(jSeparator1);
+        administrarEmpleados.add(registrarEmpleado);
+
+        eliminarEmpleado.setText("Eliminar Empleado");
+        eliminarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarEmpleadoActionPerformed(evt);
+            }
+        });
+        administrarEmpleados.add(eliminarEmpleado);
+
+        modificarEmpleado.setText("Modificar Empleado");
+        modificarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                modificarEmpleadoActionPerformed(evt);
+            }
+        });
+        administrarEmpleados.add(modificarEmpleado);
+
+        mostrarEmpleados.setText("Mostrar Empleados");
+        mostrarEmpleados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mostrarEmpleadosActionPerformed(evt);
+            }
+        });
+        administrarEmpleados.add(mostrarEmpleados);
+
+        menuAdministracion.add(administrarEmpleados);
 
         jMenuBar1.add(menuAdministracion);
 
@@ -101,7 +133,7 @@ public class MenuJefe extends javax.swing.JFrame {
                 .addContainerGap(224, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -110,47 +142,62 @@ public class MenuJefe extends javax.swing.JFrame {
                 .addGap(85, 85, 85)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
-                .addComponent(btnCerrarSesion)
+                .addComponent(jButton1)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void administrarSubordinadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarSubordinadoActionPerformed
+    private void agregarSubordinadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarSubordinadoActionPerformed
         // TODO add your handling code here:
-        control.iniciarFrmSubordinados();
-        this.dispose();
-    }//GEN-LAST:event_administrarSubordinadoActionPerformed
+        control.iniciarAgregarSubordinado();
+    }//GEN-LAST:event_agregarSubordinadoActionPerformed
 
-    private void administrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarEmpleadoActionPerformed
+    private void eliminarSubordinadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarSubordinadoActionPerformed
         // TODO add your handling code here:
-        control.iniciarFrmEmpleados();
-    }//GEN-LAST:event_administrarEmpleadoActionPerformed
+        control.iniciarEliminarSubordinado();
+    }//GEN-LAST:event_eliminarSubordinadoActionPerformed
 
-    private void administrarPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarPrestamosActionPerformed
+    private void mostrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarEmpleadosActionPerformed
         // TODO add your handling code here:
-        control.iniciarFrmPrestamos();
-    }//GEN-LAST:event_administrarPrestamosActionPerformed
+        control.iniciarfrmMostrarEmpleados();
+    }//GEN-LAST:event_mostrarEmpleadosActionPerformed
 
-    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+    private void registrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarEmpleadoActionPerformed
         // TODO add your handling code here:
-        control.cerrarSesion();
-    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+        control.iniciarAgregarEmpleado();
+    }//GEN-LAST:event_registrarEmpleadoActionPerformed
 
-    
+    private void eliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEmpleadoActionPerformed
+        // TODO add your handling code here:
+        control.iniciarEliminarEmpleado();
+        
+    }//GEN-LAST:event_eliminarEmpleadoActionPerformed
+
+    private void modificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarEmpleadoActionPerformed
+        // TODO add your handling code here:
+        this.control.iniciarModificarEmpleado();
+    }//GEN-LAST:event_modificarEmpleadoActionPerformed
+
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenuItem administrarEmpleado;
-    private javax.swing.JMenuItem administrarPrestamos;
-    private javax.swing.JMenuItem administrarSubordinado;
-    private javax.swing.JButton btnCerrarSesion;
+    private javax.swing.JMenu administrarEmpleados;
+    private javax.swing.JMenu administrarSubordinado;
+    private javax.swing.JMenuItem agregarSubordinado;
     private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JMenuItem eliminarEmpleado;
+    private javax.swing.JMenuItem eliminarSubordinado;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuAdministracion;
     private javax.swing.JMenu menuPrestamo;
+    private javax.swing.JMenuItem modificarEmpleado;
+    private javax.swing.JMenuItem mostrarEmpleados;
     private javax.swing.JMenuItem realizarPrestamo;
+    private javax.swing.JMenuItem registrarEmpleado;
     // End of variables declaration//GEN-END:variables
 }
