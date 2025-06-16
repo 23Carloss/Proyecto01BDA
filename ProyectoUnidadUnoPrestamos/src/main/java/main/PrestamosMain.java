@@ -4,7 +4,16 @@
  */
 package main;
 
+import BOs.NegocioException;
+import DTOs.RegistrarEmpleadoDTO;
+import Dominio.Empleado;
 import control.ControlEmpleadoJefe;
+import facade.EmpleadoFacade;
+import facade.IEmpleadoFacade;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import presentacion.Login;
 
 /**
@@ -17,11 +26,31 @@ public class PrestamosMain {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
-        ControlEmpleadoJefe control = new ControlEmpleadoJefe();
-        Login login = new Login(control);
-        login.setVisible(true);
-        login.setLocationRelativeTo(null);
+        try {
+            // TODO code application logic here
+            ControlEmpleadoJefe control = new ControlEmpleadoJefe();
+            IEmpleadoFacade controlEmpleado = new EmpleadoFacade();
+            List<RegistrarEmpleadoDTO> lista  =  new ArrayList();
+            RegistrarEmpleadoDTO empleado = 
+//            Empleado carlos = new Empleado("23", 
+//                "Carlos", 
+//                "Manjarrez", 
+//                "", 
+//                "patitoAzul",
+//                "Jefe", 
+//                "Sistemas"
+//        );
+//            controlEmpleado.registrarEmpleado(empleado);
+            
+            //Login login = new Login(control);
+//        login.setVisible(true);
+//        login.setLocationRelativeTo(null);
+            System.out.println(empleado.toString());
+        } catch (NegocioException ex) {
+            Logger.getLogger(PrestamosMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+   
+       
     }
     
 }

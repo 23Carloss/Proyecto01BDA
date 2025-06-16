@@ -6,8 +6,11 @@ package persistencia;
 
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
+import Dominio.Empleado;
 import Persistencia.PersistenciaException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,10 +23,10 @@ public class EmpleadoDAO implements IEmpleadoDAO{
         this.conexion = conexion;
     }
     
-    //Aqui los metodos de esta DAO
+//    Aqui los metodos de esta DAO
 
     @Override
-    public RegistrarEmpleadoDTO consultarPorId(String id) {
+    public Empleado consultarPorId(String id) {
         //implementacion
         String consulta = """
                           colsultar por id y contraaeña
@@ -31,7 +34,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                           con la del parametro
                           """;
         //mock
-        return new RegistrarEmpleadoDTO("a","","","123","Jefe");
+        return null;
     }
     
     /*Buscar los empleados de los que esta acargo un jefe*/
@@ -42,8 +45,22 @@ public class EmpleadoDAO implements IEmpleadoDAO{
     
     /*Insert*/
     @Override
-    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public Empleado registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) {
+        if(nuevoEmpleado.getTipo().equals("Jefe")){
+           
+            String comando = """
+                            Insert into Empleado(nombre, apellidoPaterno,apellidoPaterno,)
+                            values
+                         """;
+        }else{
+            try {
+                throw new PersistenciaException("Error al insertar el empleado.");
+            } catch (PersistenciaException ex) {
+                Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return null;
+        
     }
     
     /*Consulta de todos los departamentos*/

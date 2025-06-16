@@ -25,7 +25,7 @@ public class EmpleadoFacade implements IEmpleadoFacade{
     public EmpleadoFacade() {
         IConexionBD conexion = new ConexionBD();
         IEmpleadoDAO empleadoDAO = new EmpleadoDAO(conexion);
-        this.empleadoNegocio = new EmpleadoBO(empleadoDAO);
+//        this.empleadoNegocio = new EmpleadoBO(empleadoDAO);
         
     }
     

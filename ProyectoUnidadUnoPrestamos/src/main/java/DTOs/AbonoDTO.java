@@ -14,15 +14,18 @@ import java.time.LocalDateTime;
 public class AbonoDTO {
     private double cantidadAbono;
     private LocalDateTime fecha;
+    private PrestamoDTO PrestamoAsociado;
     
     
     public AbonoDTO() {
     }
 
-    public AbonoDTO(double cantidadAbono, LocalDateTime fecha) {
+    public AbonoDTO(double cantidadAbono, LocalDateTime fecha, PrestamoDTO PrestamoAsociado) {
         this.cantidadAbono = cantidadAbono;
         this.fecha = fecha;
+        this.PrestamoAsociado = PrestamoAsociado;
     }
+
 
     public double getCantidadAbono() {
         return cantidadAbono;
@@ -39,12 +42,5 @@ public class AbonoDTO {
     public void setFecha(LocalDateTime fecha) {
         this.fecha = fecha;
     }
-
-    @Override
-    public String toString() {
-        return "AbonoDTO{" + "cantidadAbono=" + cantidadAbono + ", fecha=" + fecha + '}';
-    }
-    
-    
 
 }

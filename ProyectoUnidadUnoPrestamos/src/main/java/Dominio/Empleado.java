@@ -3,47 +3,47 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 
-package DTOs;
+package Dominio;
 
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
-public class RegistrarEmpleadoDTO {
+public class Empleado {
     private String id;
     private String Nombre, ApellidoPaterno,ApellidoMaterno;
     private String password;
-    private String tipo;
     private String usuario;
-    private String departamento;
-    private EmpleadoJefeDTO Jefe;
+    private String tipo;
+    private Departamento departamento;
+    private Boolean estaActivo; 
 
-    public RegistrarEmpleadoDTO() {
+    
+    public Empleado() {
     }
 
-    public RegistrarEmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo, String usuario, String departamento, EmpleadoJefeDTO jefe) {
-        this.Nombre = Nombre;
-        this.ApellidoPaterno = ApellidoPaterno;
-        this.ApellidoMaterno = ApellidoMaterno;
-        this.password = password;
-        this.tipo = tipo;
-        this.usuario =  usuario;
-        this.departamento = departamento;
-        this.Jefe = jefe;
-    }
-
-    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
+    
+    public Empleado(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, 
+                        Departamento departamento, Boolean estaActivo,
+                        String usuario) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
         this.password = password;
-        this.usuario = usuario;
         this.tipo = tipo;
         this.departamento = departamento;
+        this.estaActivo =  estaActivo;
+        this.usuario =  usuario;
     }
-    
-    
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getNombre() {
         return Nombre;
@@ -84,31 +84,36 @@ public class RegistrarEmpleadoDTO {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
-
-    public String getDepartamento() {
+    
+    public Departamento getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(Departamento departamento) {
         this.departamento = departamento;
     }
 
-    public String getId() {
-        return id;
+    public String getUsuario() {
+        return usuario;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public Boolean getEstaActivo() {
+        return estaActivo;
+    }
+
+    public void setEstaActivo(Boolean estaActivo) {
+        this.estaActivo = estaActivo;
     }
 
     @Override
     public String toString() {
-        return "RegistrarEmpleadoDTO{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", tipo=" + tipo + ", departamento=" + departamento + '}';
+        return "Empleado{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", usuario=" + usuario + ", tipo=" + tipo + ", departamento=" + departamento + ", estaActivo=" + estaActivo + '}';
     }
-    
-    
-    
-  
-    
 
+   
+    
 }

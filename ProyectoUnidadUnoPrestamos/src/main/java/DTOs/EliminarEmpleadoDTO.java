@@ -12,6 +12,7 @@ public class EliminarEmpleadoDTO {
     private String id;
     private String Nombre, ApellidoPaterno,ApellidoMaterno;
     private String password;
+    private String usuario;
     private String tipo;
     private String departamento;
 
@@ -26,11 +27,6 @@ public class EliminarEmpleadoDTO {
         this.departamento = departamento;
     }
 
-    
-
-    
-
-
     public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
         this.id = id;
         this.Nombre = Nombre;
@@ -41,7 +37,16 @@ public class EliminarEmpleadoDTO {
         this.departamento = departamento;
     }
     
-    
+     public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String usuario, String tipo, String departamento) {
+        this.id = id;
+        this.Nombre = Nombre;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.password = password;
+        this.usuario = usuario;
+        this.tipo = tipo;
+        this.departamento = departamento;
+    }
 
     public String getNombre() {
         return Nombre;
@@ -98,11 +103,21 @@ public class EliminarEmpleadoDTO {
     public void setId(String id) {
         this.id = id;
     }
-    
-    
-    
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     @Override
     public String toString() {
-        return "EmpleadoDTO{" + "Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + '}';
+        return "EliminarEmpleadoDTO{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", usuario=" + usuario + ", tipo=" + tipo + ", departamento=" + departamento + '}';
     }
+
+   
+    
+    
 }

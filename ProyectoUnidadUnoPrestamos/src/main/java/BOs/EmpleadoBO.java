@@ -11,9 +11,9 @@ import persistencia.IEmpleadoDAO;
 
 /**
  *
- * @author jalt2
+ * @author jalt2 
  */
-public class EmpleadoBO implements IEmpleadoBO{
+public class EmpleadoBO implements IEmpleadoBO {
     private IEmpleadoDAO empleadoDAO;
 
     public EmpleadoBO(IEmpleadoDAO empleadoDAO) {

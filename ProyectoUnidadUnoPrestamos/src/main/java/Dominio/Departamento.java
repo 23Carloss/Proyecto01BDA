@@ -2,25 +2,27 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package DTOs;
+
+package Dominio;
 
 import java.util.List;
 
 /**
  *
- * @author jalt2
+ * @author $Luis Carlos Manjarrez Gonzalez
  */
-public class DepartamentoDTO {
+public class Departamento{ 
     private String nombre;
     private String saldoPresupuesto;
-    private List<CuentaMoralDTO> listaEstado;
+    private List<CuentaMoral> listaMoral  ;
 
-    public DepartamentoDTO(String nombre, String saldoPresupuesto) {
-        this.nombre = nombre;
-        this.saldoPresupuesto = saldoPresupuesto;
+    public Departamento() {
     }
 
-    public DepartamentoDTO() {
+    public Departamento(String nombre, String saldoPresupuesto, List<CuentaMoral> listaMoral) {
+        this.nombre = nombre;
+        this.saldoPresupuesto = saldoPresupuesto;
+        this.listaMoral = listaMoral;
     }
 
     public String getNombre() {
@@ -39,14 +41,15 @@ public class DepartamentoDTO {
         this.saldoPresupuesto = saldoPresupuesto;
     }
 
-    public List<CuentaMoralDTO> getListaEstado() {
-        return listaEstado;
+    public List<CuentaMoral> getlistaMoral() {
+        return listaMoral;
     }
 
-    public void setListaEstado(List<CuentaMoralDTO> listaEstado) {
-        this.listaEstado = listaEstado;
+    public void setlistaMoral(List<CuentaMoral> listaEstado) {
+        this.listaMoral = listaEstado;
     }
-    
+
+   
     
     
 }
