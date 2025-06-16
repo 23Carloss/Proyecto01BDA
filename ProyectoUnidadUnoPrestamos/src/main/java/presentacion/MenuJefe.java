@@ -31,17 +31,27 @@ public class MenuJefe extends javax.swing.JFrame {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
+        btnCerrarSesion = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menuAdministracion = new javax.swing.JMenu();
         administrarSubordinado = new javax.swing.JMenuItem();
         administrarEmpleado = new javax.swing.JMenuItem();
         administrarPrestamos = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JPopupMenu.Separator();
         menuPrestamo = new javax.swing.JMenu();
         realizarPrestamo = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Bienvenido!");
+
+        btnCerrarSesion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnCerrarSesion.setText("Cerrar Sesion");
+        btnCerrarSesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCerrarSesionActionPerformed(evt);
+            }
+        });
 
         menuAdministracion.setText("Administracion");
 
@@ -68,6 +78,7 @@ public class MenuJefe extends javax.swing.JFrame {
             }
         });
         menuAdministracion.add(administrarPrestamos);
+        menuAdministracion.add(jSeparator1);
 
         jMenuBar1.add(menuAdministracion);
 
@@ -88,13 +99,19 @@ public class MenuJefe extends javax.swing.JFrame {
                 .addGap(208, 208, 208)
                 .addComponent(jLabel1)
                 .addContainerGap(224, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(85, 85, 85)
                 .addComponent(jLabel1)
-                .addContainerGap(176, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 147, Short.MAX_VALUE)
+                .addComponent(btnCerrarSesion)
+                .addContainerGap())
         );
 
         pack();
@@ -116,15 +133,22 @@ public class MenuJefe extends javax.swing.JFrame {
         control.iniciarFrmPrestamos();
     }//GEN-LAST:event_administrarPrestamosActionPerformed
 
+    private void btnCerrarSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarSesionActionPerformed
+        // TODO add your handling code here:
+        control.cerrarSesion();
+    }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuItem administrarEmpleado;
     private javax.swing.JMenuItem administrarPrestamos;
     private javax.swing.JMenuItem administrarSubordinado;
+    private javax.swing.JButton btnCerrarSesion;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu menuAdministracion;
     private javax.swing.JMenu menuPrestamo;
     private javax.swing.JMenuItem realizarPrestamo;

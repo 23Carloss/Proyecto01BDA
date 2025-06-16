@@ -22,6 +22,7 @@ public class ControlEmpleado {
     private AdministrarSubordinados frmSubordinados;
     private AdministrarEmpleados frmEmpleados;
     private AdministrarPrestamos frmPrestamos;
+    private Login frmLogin;
 
     public ControlEmpleado() {
     }
@@ -68,5 +69,12 @@ public class ControlEmpleado {
         this.frmPrestamos.setLocationRelativeTo(null);
         this.frmMenuJefe.dispose();
 
+    }
+    
+    public void cerrarSesion(){
+        this.frmLogin = new Login(this);
+        this.frmLogin.setVisible(true);
+        this.frmLogin.setLocationRelativeTo(null);
+        this.frmMenuJefe.dispose();
     }
 }
