@@ -4,7 +4,9 @@
  */
 package BOs;
 
-import DTOs.EmpleadoDTO;
+import DTOs.DepartamentoDTO;
+import DTOs.RegistrarEmpleadoDTO;
+import java.util.List;
 import persistencia.IEmpleadoDAO;
 
 /**
@@ -19,12 +21,32 @@ public class EmpleadoBO implements IEmpleadoBO{
     }
 
     @Override
-    public EmpleadoDTO consultarPorId(String id) throws NegocioException{
+    public RegistrarEmpleadoDTO consultarPorId(String id) throws NegocioException{
         if (id == null) {
             throw new NegocioException("El id es null");
         }
         
         return this.empleadoDAO.consultarPorId(id);
+    }
+
+    @Override
+    public List<RegistrarEmpleadoDTO> consultarEmpleadosPorJefe(String idJefe) {
+        return this.empleadoDAO.consultarEmpleadosPorJefe(idJefe);
+    }
+
+    @Override
+    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException {
+        return empleadoDAO.registrarEmpleado(nuevoEmpleado);
+    }
+
+    @Override
+    public List<DepartamentoDTO> consultarDepartamentos() throws NegocioException {
+        return empleadoDAO.consultarDepartamentos();
+    }
+
+    @Override
+    public int eliminarEmpleado(String id) throws NegocioException {
+        return empleadoDAO.eliminarEmpleado(id);
     }
     
     

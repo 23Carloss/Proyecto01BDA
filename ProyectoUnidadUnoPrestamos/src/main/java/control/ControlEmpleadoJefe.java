@@ -5,10 +5,14 @@
 package control;
 
 import BOs.NegocioException;
-import DTOs.EmpleadoDTO;
+import DTOs.DepartamentoDTO;
+import DTOs.EliminarEmpleadoDTO;
+import DTOs.RegistrarEmpleadoDTO;
+import DTOs.EmpleadoModificarDTO;
 import facade.EmpleadoFacade;
+import java.util.List;
 import presentacion.AdministrarPrestamos;
-import presentacion.AgregarEmpleado;
+import presentacion.RegistrarEmpleado;
 import presentacion.AgregarSubordinado;
 import presentacion.EliminarEmpleado;
 import presentacion.EliminarSubordinado;
@@ -21,28 +25,31 @@ import presentacion.MostrarEmpleados;
  *
  * @author jalt2
  */
-public class ControlEmpleado {
+public class ControlEmpleadoJefe {
+    private RegistrarEmpleadoDTO empleadoActual;
     private MenuJefe frmMenuJefe;
     private AgregarSubordinado frmAgregarSubordinado;
     private EliminarSubordinado frmEliminarSubordinado;
-    private AgregarEmpleado frmAgregarEmpleado;
+    private RegistrarEmpleado frmAgregarEmpleado;
     private EliminarEmpleado frmEliminarEmpleado;
     private ModificarEmpleado frmModificarEmpleado;
     private MostrarEmpleados frmMostrarEmpleados;
     private AdministrarPrestamos frmPrestamos;
     private Login frmLogin;
 
-    public ControlEmpleado() {
+    public ControlEmpleadoJefe() {
     }
     
     
     /*Este metodo recibe id y contraseña del login y lo compara con lo que hay en la base de datos*/
     public boolean iniciarSesion(String id, String password) throws NegocioException{
         EmpleadoFacade facade = new EmpleadoFacade();
-        EmpleadoDTO empleadoActual = facade.consultarPorId(id);
+        empleadoActual = facade.consultarPorId(id);
         
         if (empleadoActual.getPassword().equals(password) && empleadoActual.getTipo().equals("Jefe")) {
+            
             this.iniciarMenuJefe();
+            
             return true;
         }
         return false;
@@ -71,27 +78,27 @@ public class ControlEmpleado {
     
     
     public void iniciarAgregarEmpleado(){
-        frmAgregarEmpleado = new AgregarEmpleado(this);
+        frmAgregarEmpleado = new RegistrarEmpleado(this);
         frmAgregarEmpleado.setVisible(true);
         frmAgregarEmpleado.setLocationRelativeTo(null);
         frmMenuJefe.dispose();
     }
     
-    public void iniciarEliminarEmpleado(){
+    public void iniciarEliminarEmpleado() throws NegocioException{
         frmEliminarEmpleado = new EliminarEmpleado(this);
         frmEliminarEmpleado.setVisible(true);
         frmEliminarEmpleado.setLocationRelativeTo(null);
         frmMenuJefe.dispose();
     }
     
-    public void iniciarModificarEmpleado(){
+    public void iniciarModificarEmpleado() throws NegocioException{
         frmModificarEmpleado = new ModificarEmpleado(this);
         frmModificarEmpleado.setVisible(true);
         frmModificarEmpleado.setLocationRelativeTo(null);
         frmMenuJefe.dispose();
     }
     
-    public void iniciarfrmMostrarEmpleados(){
+    public void iniciarfrmMostrarEmpleados() throws NegocioException{
         frmMostrarEmpleados = new MostrarEmpleados(this);
         frmMostrarEmpleados.setVisible(true);
         frmMostrarEmpleados.setLocationRelativeTo(null);
@@ -111,5 +118,29 @@ public class ControlEmpleado {
         this.frmLogin.setVisible(true);
         this.frmLogin.setLocationRelativeTo(null);
         this.frmMenuJefe.dispose();
+    }
+    
+    public List<RegistrarEmpleadoDTO> empleadosPorJefe() throws NegocioException{
+        EmpleadoFacade facade = new EmpleadoFacade();
+        return facade.consultarEmpleadoPorJefe(empleadoActual.getId());
+    }
+    
+    public List<DepartamentoDTO> consultarDepartamentos() throws NegocioException{
+        EmpleadoFacade facade = new EmpleadoFacade();
+        return facade.consultarDepartamentos();
+    }
+    
+    public EmpleadoModificarDTO recuperarEmpleadoModificar(EmpleadoModificarDTO empleadoModificar){
+        return empleadoModificar;
+    }
+    
+    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException{
+        EmpleadoFacade facade = new EmpleadoFacade();
+        return facade.registrarEmpleado(nuevoEmpleado);
+    }
+    
+    public int eliminarEmpleado(String id) throws NegocioException{
+        EmpleadoFacade facade = new EmpleadoFacade();
+        return facade.eliminarEmpleado(id);
     }
 }

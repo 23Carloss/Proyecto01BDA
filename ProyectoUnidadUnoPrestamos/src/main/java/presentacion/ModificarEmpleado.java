@@ -4,22 +4,67 @@
  */
 package presentacion;
 
-import control.ControlEmpleado;
+import BOs.NegocioException;
+import DTOs.RegistrarEmpleadoDTO;
+import DTOs.EmpleadoModificarDTO;
+import control.ControlEmpleadoJefe;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author jalt2
  */
 public class ModificarEmpleado extends javax.swing.JFrame {
-    private ControlEmpleado control;
+    private ControlEmpleadoJefe control;
+    private EmpleadoModificarDTO empleadoModificar;
     /**
      * Creates new form ModificarEmpleado
      */
-    public ModificarEmpleado(ControlEmpleado control) {
+    public ModificarEmpleado(ControlEmpleadoJefe control) throws NegocioException {
         initComponents();
         this.control = control;
+        this.llenarTabla();
+        seleccionarEmpleado();
     }
-
+    
+    private void llenarTabla() throws NegocioException{
+        DefaultTableModel modelo = (DefaultTableModel) tblEmpleados.getModel();
+        modelo.setRowCount(0);
+        
+        List<RegistrarEmpleadoDTO> listaEmpleados = control.empleadosPorJefe();
+        
+        for(RegistrarEmpleadoDTO empleado : listaEmpleados){
+            modelo.addRow(new Object[]{
+                empleado.getNombre(),
+                empleado.getApellidoPaterno(),
+                empleado.getApellidoMaterno(),
+                empleado.getDepartamento()
+            });
+        }
+    }
+    
+    private EmpleadoModificarDTO recuperarEmpleadoModificar(){
+        return empleadoModificar;
+    }
+    
+    private void seleccionarEmpleado(){
+        this.tblEmpleados.getSelectionModel().addListSelectionListener(e->{
+            if (!e.getValueIsAdjusting()) {
+                int filaSeleccionada = tblEmpleados.getSelectedRow();
+                if (filaSeleccionada !=-1) {
+                    String nombre = tblEmpleados.getValueAt(filaSeleccionada, 0).toString();
+                    String apellidoPaterno = tblEmpleados.getValueAt(filaSeleccionada, 1).toString();
+                    String apellidoMaterno = tblEmpleados.getValueAt(filaSeleccionada, 2).toString();
+                    String Departamento = tblEmpleados.getValueAt(filaSeleccionada, 3).toString();
+                    
+                    empleadoModificar = new EmpleadoModificarDTO(nombre, apellidoPaterno, apellidoMaterno, Departamento);
+                    
+                }
+            }
+        
+        });
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,9 +74,16 @@ public class ModificarEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblEmpleados = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        btnSeleccionar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Modificar Empleado"));
 
         btnRegresar.setText("Regresar");
         btnRegresar.addActionListener(new java.awt.event.ActionListener() {
@@ -40,21 +92,77 @@ public class ModificarEmpleado extends javax.swing.JFrame {
             }
         });
 
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Nombre", "Apellido Paterno", "Apellido Materno", "Departamento"
+            }
+        ));
+        jScrollPane1.setViewportView(tblEmpleados);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setText("Seleccione un empleado para modificar su informacion.");
+
+        btnSeleccionar.setText("Seleccionar");
+        btnSeleccionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSeleccionarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(btnSeleccionar)
+                        .addGap(105, 105, 105)
+                        .addComponent(btnRegresar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel1)
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnRegresar)
+                    .addComponent(btnSeleccionar))
+                .addGap(31, 31, 31))
+        );
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(319, Short.MAX_VALUE)
-                .addComponent(btnRegresar)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(271, Short.MAX_VALUE)
-                .addComponent(btnRegresar)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -63,10 +171,22 @@ public class ModificarEmpleado extends javax.swing.JFrame {
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
         // TODO add your handling code here:
         this.control.iniciarMenuJefe();
+        dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
+
+    private void btnSeleccionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarActionPerformed
+        // TODO add your handling code here:
+        this.recuperarEmpleadoModificar();
+        control.recuperarEmpleadoModificar(empleadoModificar);
+    }//GEN-LAST:event_btnSeleccionarActionPerformed
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
+    private javax.swing.JButton btnSeleccionar;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblEmpleados;
     // End of variables declaration//GEN-END:variables
 }

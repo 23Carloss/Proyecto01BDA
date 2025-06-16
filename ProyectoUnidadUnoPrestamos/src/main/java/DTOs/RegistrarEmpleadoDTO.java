@@ -9,21 +9,44 @@ package DTOs;
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
-public class EmpleadoDTO {
+public class RegistrarEmpleadoDTO {
+    private String id;
     private String Nombre, ApellidoPaterno,ApellidoMaterno;
     private String password;
     private String tipo;
+    private String departamento;
 
-    public EmpleadoDTO() {
+    public RegistrarEmpleadoDTO() {
     }
 
-    public EmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo) {
+    public RegistrarEmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo) {
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
         this.password = password;
         this.tipo = tipo;
     }
+
+    public RegistrarEmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
+        this.Nombre = Nombre;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.password = password;
+        this.tipo = tipo;
+        this.departamento = departamento;
+    }
+
+    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
+        this.id = id;
+        this.Nombre = Nombre;
+        this.ApellidoPaterno = ApellidoPaterno;
+        this.ApellidoMaterno = ApellidoMaterno;
+        this.password = password;
+        this.tipo = tipo;
+        this.departamento = departamento;
+    }
+    
+    
 
     public String getNombre() {
         return Nombre;
@@ -63,6 +86,22 @@ public class EmpleadoDTO {
 
     public void setTipo(String tipo) {
         this.tipo = tipo;
+    }
+
+    public String getDepartamento() {
+        return departamento;
+    }
+
+    public void setDepartamento(String departamento) {
+        this.departamento = departamento;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
     
     

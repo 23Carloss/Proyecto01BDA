@@ -4,18 +4,18 @@
  */
 package presentacion;
 
-import control.ControlEmpleado;
+import control.ControlEmpleadoJefe;
 
 /**
  *
  * @author jalt2
  */
 public class AgregarSubordinado extends javax.swing.JFrame {
-    private ControlEmpleado control;
+    private ControlEmpleadoJefe control;
     /**
      * Creates new form AgregarSubordinado
      */
-    public AgregarSubordinado(ControlEmpleado control) {
+    public AgregarSubordinado(ControlEmpleadoJefe control) {
         initComponents();
         this.control=control;
     }

@@ -7,7 +7,9 @@ package facade;
 import BOs.EmpleadoBO;
 import BOs.IEmpleadoBO;
 import BOs.NegocioException;
-import DTOs.EmpleadoDTO;
+import DTOs.DepartamentoDTO;
+import DTOs.RegistrarEmpleadoDTO;
+import java.util.List;
 import persistencia.ConexionBD;
 import persistencia.EmpleadoDAO;
 import persistencia.IConexionBD;
@@ -26,10 +28,34 @@ public class EmpleadoFacade implements IEmpleadoFacade{
         this.empleadoNegocio = new EmpleadoBO(empleadoDAO);
         
     }
+    
 
     @Override
-    public EmpleadoDTO consultarPorId(String id) throws NegocioException{
+    public RegistrarEmpleadoDTO consultarPorId(String id) throws NegocioException{
         return this.empleadoNegocio.consultarPorId(id);
+    }
+
+
+
+    @Override
+    public List<RegistrarEmpleadoDTO> consultarEmpleadoPorJefe(String idJefe) throws NegocioException {
+        return this.empleadoNegocio.consultarEmpleadosPorJefe(idJefe);
+    
+    }
+
+    @Override
+    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException {
+        return this.empleadoNegocio.registrarEmpleado(nuevoEmpleado);
+    }
+
+    @Override
+    public List<DepartamentoDTO> consultarDepartamentos() throws NegocioException {
+        return this.empleadoNegocio.consultarDepartamentos();
+    }
+
+    @Override
+    public int eliminarEmpleado(String id) throws NegocioException {
+        return empleadoNegocio.eliminarEmpleado(id);
     }
     
     

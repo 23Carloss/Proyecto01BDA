@@ -4,18 +4,21 @@
  */
 package presentacion;
 
-import control.ControlEmpleado;
+import BOs.NegocioException;
+import control.ControlEmpleadoJefe;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author jalt2
  */
 public class MenuJefe extends javax.swing.JFrame {
-    private ControlEmpleado control;
+    private ControlEmpleadoJefe control;
     /**
      * Creates new form MenuJefe
      */
-    public MenuJefe(ControlEmpleado control) {
+    public MenuJefe(ControlEmpleadoJefe control) {
         initComponents();
         this.control=control;
     }
@@ -160,8 +163,12 @@ public class MenuJefe extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminarSubordinadoActionPerformed
 
     private void mostrarEmpleadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarEmpleadosActionPerformed
-        // TODO add your handling code here:
-        control.iniciarfrmMostrarEmpleados();
+        try {
+            // TODO add your handling code here:
+            control.iniciarfrmMostrarEmpleados();
+        } catch (NegocioException ex) {
+            Logger.getLogger(MenuJefe.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_mostrarEmpleadosActionPerformed
 
     private void registrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registrarEmpleadoActionPerformed
@@ -170,14 +177,22 @@ public class MenuJefe extends javax.swing.JFrame {
     }//GEN-LAST:event_registrarEmpleadoActionPerformed
 
     private void eliminarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarEmpleadoActionPerformed
-        // TODO add your handling code here:
-        control.iniciarEliminarEmpleado();
+        try {
+            // TODO add your handling code here:
+            control.iniciarEliminarEmpleado();
+        } catch (NegocioException ex) {
+            Logger.getLogger(MenuJefe.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
     }//GEN-LAST:event_eliminarEmpleadoActionPerformed
 
     private void modificarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarEmpleadoActionPerformed
-        // TODO add your handling code here:
-        this.control.iniciarModificarEmpleado();
+        try {
+            // TODO add your handling code here:
+            this.control.iniciarModificarEmpleado();
+        } catch (NegocioException ex) {
+            Logger.getLogger(MenuJefe.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_modificarEmpleadoActionPerformed
 
         

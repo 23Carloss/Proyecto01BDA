@@ -4,12 +4,18 @@
  */
 package persistencia;
 
-import DTOs.EmpleadoDTO;
+import DTOs.DepartamentoDTO;
+import DTOs.RegistrarEmpleadoDTO;
+import java.util.List;
 
 /**
  *
  * @author jalt2
  */
 public interface IEmpleadoDAO {
-    public EmpleadoDTO consultarPorId(String id);
+    public RegistrarEmpleadoDTO consultarPorId(String id);
+    public List<RegistrarEmpleadoDTO> consultarEmpleadosPorJefe(String idJefe);
+    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado);
+    public List<DepartamentoDTO> consultarDepartamentos();
+    public int eliminarEmpleado(String id);
 }

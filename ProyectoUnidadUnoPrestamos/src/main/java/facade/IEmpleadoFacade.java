@@ -5,12 +5,18 @@
 package facade;
 
 import BOs.NegocioException;
-import DTOs.EmpleadoDTO;
+import DTOs.DepartamentoDTO;
+import DTOs.RegistrarEmpleadoDTO;
+import java.util.List;
 
 /**
  *
  * @author jalt2
  */
 public interface IEmpleadoFacade {
-    public EmpleadoDTO consultarPorId(String id)throws NegocioException;
+    public RegistrarEmpleadoDTO consultarPorId(String id)throws NegocioException;
+    public List<RegistrarEmpleadoDTO> consultarEmpleadoPorJefe(String idJefe)throws NegocioException;
+    public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException;
+    public List<DepartamentoDTO> consultarDepartamentos()throws NegocioException;
+    public int eliminarEmpleado(String id)throws NegocioException;
 }

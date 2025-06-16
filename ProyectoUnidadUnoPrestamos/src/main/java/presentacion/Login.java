@@ -5,7 +5,7 @@
 package presentacion;
 
 import DTOs.InicioSesionDTO;
-import control.ControlEmpleado;
+import control.ControlEmpleadoJefe;
 import javax.swing.JOptionPane;
 
 /**
@@ -13,11 +13,11 @@ import javax.swing.JOptionPane;
  * @author jalt2
  */
 public class Login extends javax.swing.JFrame {
-    ControlEmpleado control;
+    ControlEmpleadoJefe control;
     /**
      * Creates new form Login
      */
-    public Login(ControlEmpleado control) {
+    public Login(ControlEmpleadoJefe control) {
         initComponents();
         this.control = control;
     }

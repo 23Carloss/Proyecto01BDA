@@ -4,18 +4,18 @@
  */
 package presentacion;
 
-import control.ControlEmpleado;
+import control.ControlEmpleadoJefe;
 
 /**
  *
  * @author jalt2
  */
 public class EliminarSubordinado extends javax.swing.JFrame {
-    private ControlEmpleado control;
+    private ControlEmpleadoJefe control;
     /**
      * Creates new form EliminarSubordinado
      */
-    public EliminarSubordinado(ControlEmpleado control) {
+    public EliminarSubordinado(ControlEmpleadoJefe control) {
         initComponents();
         this.control=control;
     }
@@ -32,7 +32,7 @@ public class EliminarSubordinado extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         btnRegresar = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblEmpleados = new javax.swing.JTable();
         btnSeleccionar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
@@ -41,8 +41,13 @@ public class EliminarSubordinado extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Eliminar Subordinado"));
 
         btnRegresar.setText("Regresar");
+        btnRegresar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegresarActionPerformed(evt);
+            }
+        });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblEmpleados.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -53,7 +58,7 @@ public class EliminarSubordinado extends javax.swing.JFrame {
                 "Nombre", "Apellido Paterno", "Apellido Materno", "Departamento"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblEmpleados);
 
         btnSeleccionar.setText("Seleccionar");
 
@@ -105,6 +110,12 @@ public class EliminarSubordinado extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
+        // TODO add your handling code here:
+        control.iniciarMenuJefe();
+        dispose();
+    }//GEN-LAST:event_btnRegresarActionPerformed
+
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -113,6 +124,6 @@ public class EliminarSubordinado extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblEmpleados;
     // End of variables declaration//GEN-END:variables
 }

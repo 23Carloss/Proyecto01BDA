@@ -4,18 +4,18 @@
  */
 package presentacion;
 
-import control.ControlEmpleado;
+import control.ControlEmpleadoJefe;
 
 /**
  *
  * @author jalt2
  */
 public class AdministrarEmpleados extends javax.swing.JFrame {
-    private ControlEmpleado control;
+    private ControlEmpleadoJefe control;
     /**
      * Creates new form AdministrarEmpleados
      */
-    public AdministrarEmpleados(ControlEmpleado control) {
+    public AdministrarEmpleados(ControlEmpleadoJefe control) {
         initComponents();
         this.control = control;
     }

@@ -4,7 +4,7 @@
  */
 package main;
 
-import control.ControlEmpleado;
+import control.ControlEmpleadoJefe;
 import presentacion.Login;
 
 /**
@@ -18,7 +18,7 @@ public class PrestamosMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
-        ControlEmpleado control = new ControlEmpleado();
+        ControlEmpleadoJefe control = new ControlEmpleadoJefe();
         Login login = new Login(control);
         login.setVisible(true);
         login.setLocationRelativeTo(null);
