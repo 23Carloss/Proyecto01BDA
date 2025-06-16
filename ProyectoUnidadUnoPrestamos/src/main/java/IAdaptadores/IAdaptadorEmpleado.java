@@ -18,5 +18,8 @@ public interface IAdaptadorEmpleado {
     public Empleado convertirADominioRegistrar(RegistrarEmpleadoDTO empleado) throws PersistenciaException;
     public Empleado converirADominioEliminar(EliminarEmpleadoDTO empleado)throws PersistenciaException;
     public Empleado convertADominioJefe(EmpleadoJefeDTO jefe)throws PersistenciaException;
+    public RegistrarEmpleadoDTO convertirADTORegistrar(Empleado empleado) throws PersistenciaException;
+    public EliminarEmpleadoDTO converirADTOEliminar(Empleado empleado)throws PersistenciaException;
+    public EmpleadoJefeDTO convertirADTOJefe(Empleado jefe)throws PersistenciaException;
     
 }

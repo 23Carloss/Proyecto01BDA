@@ -9,6 +9,7 @@ import DTOs.EliminarEmpleadoDTO;
 import DTOs.EmpleadoJefeDTO;
 import DTOs.RegistrarEmpleadoDTO;
 import Dominio.Empleado;
+import IAdaptadores.IAdaptadorDepartamento;
 import IAdaptadores.IAdaptadorEmpleado;
 import Persistencia.PersistenciaException;
 
@@ -18,77 +19,108 @@ import Persistencia.PersistenciaException;
  */
 public class AdaptadorEmpleado implements IAdaptadorEmpleado{
 
-    @Override
-    public Empleado convertirADominioRegistrar(RegistrarEmpleadoDTO empleado) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
+    private IAdaptadorEmpleado AdapterEmpleado;
+    private IAdaptadorDepartamento AdapterDepartamento;
 
-    @Override
-    public Empleado converirADominioEliminar(EliminarEmpleadoDTO empleado) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-
-    @Override
-    public Empleado convertADominioJefe(EmpleadoJefeDTO jefe) throws PersistenciaException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
 
     @Override
     public Empleado convertirADominioRegistrar(RegistrarEmpleadoDTO empleado) throws PersistenciaException {
         if(empleado == null){
-            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
-        }
-         Empleado empleadoDominio = new Empleado(empleado.getId(), 
-                empleado.getNombre(), 
-                empleado.getApellidoPaterno(), 
-                empleado.getApellidoMaterno(), 
-                empleado.getPassword(),
-                empleado.getTipo(),
-                empleado.getDepartamento());
-         return empleadoDominio;
-    }
-
-    @Override
-    public Empleado converirADominioEliminar(EliminarEmpleadoDTO empleado) throws PersistenciaException {
-        if(empleado == null){
-            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
-        }
-         Empleado empleadoDominio = new Empleado(
-                 empleado.getId(), 
-                 empleado.getNombre(), 
-                 empleado.getApellidoPaterno(), 
-                 empleado.getApellidoMaterno(), 
-                 empleado.getPassword(),
-                 empleado.getTipo());
-            empleadoDominio.setNombre(empleado.getId()); 
-            empleadoDominio.setApellidoPaterno(empleado.getId()); 
-            empleadoDominio.setApellidoMaterno(empleado.getId()); 
-            empleadoDominio.setPassword(empleado.getId()); 
-            empleadoDominio.setUsuario(empleado.getUsuario());
-            empleadoDominio.setDepartamento(empleado.getDepartamento());
-            empleadoDominio.setTipo(empleado.get)); 
-                
-         return empleadoDominio;
-    }
-
-
-    @Override
-    public Empleado convertADominioJefe(EmpleadoJefeDTO jefe) throws PersistenciaException{
-       if(jefe == null){
             throw new PersistenciaException("Error al convertir: el parametro es igual a null");
         }
          Empleado empleadoDominio = new Empleado();
-            empleadoDominio.setNombre(jefe.getId()); 
-            empleadoDominio.setApellidoPaterno(jefe.getId()); 
-            empleadoDominio.setApellidoMaterno(jefe.getId()); 
-            empleadoDominio.setPassword(jefe.getId()); 
-            empleadoDominio.set(jefe.getId()); 
-                jefe.getNombre(), 
-                jefe.getApelldoPaterno(), 
-                jefe.getapelldoMaterno(), 
-                jefe.getDepartamento();
+         empleadoDominio.setNombre(empleado.getId()); 
+         empleadoDominio.setApellidoPaterno(empleado.getNombre()); 
+         empleadoDominio.setApellidoMaterno(empleado.getApellidoPaterno()); 
+         empleadoDominio.setPassword(empleado.getApellidoMaterno()); 
+         empleadoDominio.setDepartamento(AdapterDepartamento.convertirADominio(empleado.getDepartamento()));
+         
          return empleadoDominio;
-    
     }
-//    
+
+    @Override
+    public Empleado converirADominioEliminar(EliminarEmpleadoDTO empleado) throws PersistenciaException {
+        if(empleado == null){
+            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
+        }
+         Empleado empleadoDominio = new Empleado();
+         empleadoDominio.setNombre(empleado.getId()); 
+         empleadoDominio.setApellidoPaterno(empleado.getNombre()); 
+         empleadoDominio.setApellidoMaterno(empleado.getApellidoPaterno()); 
+         empleadoDominio.setPassword(empleado.getApellidoMaterno()); 
+         empleadoDominio.setDepartamento(AdapterDepartamento.convertirADominio(empleado.getDepartamento()));
+         
+         return empleadoDominio;
+        }
+    
+
+   
+
+    @Override
+    public RegistrarEmpleadoDTO convertirADTORegistrar(Empleado empleado) throws PersistenciaException {
+        if(empleado == null){
+            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
+        }
+         RegistrarEmpleadoDTO empleadoDTO = new RegistrarEmpleadoDTO();
+         empleado.setId(empleado.getId());
+         empleadoDTO.setNombre(empleado.getNombre()); 
+         empleadoDTO.setApellidoPaterno(empleado.getApellidoPaterno()); 
+         empleadoDTO.setApellidoMaterno(empleado.getApellidoMaterno()); 
+         empleadoDTO.setPassword(empleado.getApellidoMaterno()); // una DTO no debe tener la contraseña
+         empleadoDTO.setDepartamento(AdapterDepartamento.convertirADTO(empleado.getDepartamento()));
+         
+         return empleadoDTO;
+        }
+    
+
+    @Override
+    public EliminarEmpleadoDTO converirADTOEliminar(Empleado empleado) throws PersistenciaException {
+        if(empleado == null){
+            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
+        }
+         EliminarEmpleadoDTO empleadoDTO = new EliminarEmpleadoDTO();
+         empleadoDTO.setId(empleado.getId());
+         empleadoDTO.setNombre(empleado.getNombre()); 
+         empleadoDTO.setApellidoPaterno(empleado.getApellidoPaterno()); 
+         empleadoDTO.setApellidoMaterno(empleado.getApellidoMaterno()); 
+         empleadoDTO.setPassword(empleado.getApellidoMaterno()); // una DTO no debe tener la contraseña
+         empleadoDTO.setDepartamento(AdapterDepartamento.convertirADTO(empleado.getDepartamento()));
+         
+         return empleadoDTO;
+        }
+    
+    @Override
+    public EmpleadoJefeDTO convertirADTOJefe(Empleado jefe) throws PersistenciaException {
+       if(jefe == null){
+            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
+        }
+         EmpleadoJefeDTO JefeDTO = new EmpleadoJefeDTO();
+         JefeDTO.setId(jefe.getId());
+         JefeDTO.setNombre(jefe.getNombre()); 
+         JefeDTO.setApelldoPaterno(jefe.getApellidoPaterno()); 
+         JefeDTO.setapelldoMaterno(jefe.getApellidoMaterno()); 
+         //JefeDTO.setPassword(jefe.getApellidoMaterno()); // una DTO no debe tener la contraseña
+         JefeDTO.setDepartamento(AdapterDepartamento.convertirADTO(jefe.getDepartamento()));
+         
+         return JefeDTO;
+        }
+
+    @Override
+    public Empleado convertADominioJefe(EmpleadoJefeDTO jefe) throws PersistenciaException {
+        if(jefe == null){
+            throw new PersistenciaException("Error al convertir: el parametro es igual a null");
+        }
+         Empleado JefeDTO = new Empleado();
+         JefeDTO.setId(jefe.getId());
+         JefeDTO.setNombre(jefe.getNombre()); 
+         JefeDTO.setApellidoPaterno(jefe.getApelldoPaterno()); 
+         JefeDTO.setApellidoMaterno(jefe.getapelldoMaterno()); 
+         //JefeDTO.setPassword(jefe.getApellidoMaterno()); // una DTO no debe tener la contraseña
+         JefeDTO.setDepartamento(AdapterDepartamento.convertirADominio(jefe.getDepartamento()));
+         
+         return JefeDTO;
+        }
+
+ 
 }
+

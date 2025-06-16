@@ -14,12 +14,12 @@ public class EliminarEmpleadoDTO {
     private String password;
     private String usuario;
     private String tipo;
-    private String departamento;
+    private DepartamentoDTO departamento;
 
     public EliminarEmpleadoDTO() {
     }
 
-    public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String departamento) {
+    public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, DepartamentoDTO departamento) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -27,7 +27,7 @@ public class EliminarEmpleadoDTO {
         this.departamento = departamento;
     }
 
-    public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
+    public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, DepartamentoDTO departamento) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -37,7 +37,7 @@ public class EliminarEmpleadoDTO {
         this.departamento = departamento;
     }
     
-     public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String usuario, String tipo, String departamento) {
+     public EliminarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String usuario, String tipo, DepartamentoDTO departamento) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -88,11 +88,11 @@ public class EliminarEmpleadoDTO {
         this.tipo = tipo;
     }
 
-    public String getDepartamento() {
+    public DepartamentoDTO getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(DepartamentoDTO departamento) {
         this.departamento = departamento;
     }
 

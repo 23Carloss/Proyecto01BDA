@@ -15,13 +15,13 @@ public class RegistrarEmpleadoDTO {
     private String password;
     private String tipo;
     private String usuario;
-    private String departamento;
+    private DepartamentoDTO departamento;
     private EmpleadoJefeDTO Jefe;
 
     public RegistrarEmpleadoDTO() {
     }
 
-    public RegistrarEmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo, String usuario, String departamento, EmpleadoJefeDTO jefe) {
+    public RegistrarEmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo, String usuario, DepartamentoDTO departamento, EmpleadoJefeDTO jefe) {
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
@@ -32,7 +32,7 @@ public class RegistrarEmpleadoDTO {
         this.Jefe = jefe;
     }
 
-    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, String departamento) {
+    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, DepartamentoDTO departamento) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -85,11 +85,11 @@ public class RegistrarEmpleadoDTO {
         this.tipo = tipo;
     }
 
-    public String getDepartamento() {
+    public DepartamentoDTO getDepartamento() {
         return departamento;
     }
 
-    public void setDepartamento(String departamento) {
+    public void setDepartamento(DepartamentoDTO departamento) {
         this.departamento = departamento;
     }
 
