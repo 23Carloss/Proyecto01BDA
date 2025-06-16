@@ -6,6 +6,7 @@ package presentacion;
 
 import DTOs.InicioSesionDTO;
 import control.ControlEmpleado;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -111,7 +112,12 @@ public class Login extends javax.swing.JFrame {
             String usuario = this.txtUsuario.getText();
             String password = this.txtContrasena.getText();
             
-            control.iniciarSesion(usuario, password);
+            if(!control.iniciarSesion(usuario, password)){
+                JOptionPane.showMessageDialog(this, "Contraseña o Usuario incorrectas", "Credenciales invalidas", JOptionPane.WARNING_MESSAGE);
+                
+            }else{
+                this.dispose();
+            }
             
         } catch (Exception e) {
             

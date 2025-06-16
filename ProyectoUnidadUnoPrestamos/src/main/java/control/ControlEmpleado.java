@@ -7,6 +7,7 @@ package control;
 import BOs.NegocioException;
 import DTOs.EmpleadoDTO;
 import facade.EmpleadoFacade;
+import presentacion.Login;
 import presentacion.MenuJefe;
 
 /**
@@ -15,13 +16,14 @@ import presentacion.MenuJefe;
  */
 public class ControlEmpleado {
     private MenuJefe frmMenuJefe;
+    private Login frmLogin;
 
     public ControlEmpleado() {
     }
     
     
     
-    public void iniciarSesion(String id, String password) throws NegocioException{
+    public boolean iniciarSesion(String id, String password) throws NegocioException{
         EmpleadoFacade facade = new EmpleadoFacade();
         EmpleadoDTO empleadoActual = facade.consultarPorId(id);
         
@@ -29,9 +31,10 @@ public class ControlEmpleado {
             this.frmMenuJefe = new MenuJefe();
             this.frmMenuJefe.setVisible(true);
             this.frmMenuJefe.setLocationRelativeTo(null);
-        }else{
-            throw new NegocioException("Credenciales Incorrectas");
+            
+            return true;
         }
+        return false;
         
     }
 }
