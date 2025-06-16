@@ -10,12 +10,12 @@ import control.ControlEmpleado;
  *
  * @author jalt2
  */
-public class AdministrarSubordinados extends javax.swing.JFrame {
+public class AdministrarPrestamos extends javax.swing.JFrame {
     private ControlEmpleado control;
     /**
-     * Creates new form AdministrarSubordinados
+     * Creates new form AdministrarPrestamos
      */
-    public AdministrarSubordinados(ControlEmpleado control) {
+    public AdministrarPrestamos(ControlEmpleado control) {
         initComponents();
         this.control=control;
     }
@@ -30,9 +30,6 @@ public class AdministrarSubordinados extends javax.swing.JFrame {
     private void initComponents() {
 
         btnRegresar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,27 +40,19 @@ public class AdministrarSubordinados extends javax.swing.JFrame {
             }
         });
 
-        jMenu1.setText("Agregar Subordinado");
-        jMenuBar1.add(jMenu1);
-
-        jMenu2.setText("Eliminar Subordinado");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(372, Short.MAX_VALUE)
+                .addContainerGap(319, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(315, Short.MAX_VALUE)
+                .addContainerGap(271, Short.MAX_VALUE)
                 .addComponent(btnRegresar)
                 .addContainerGap())
         );
@@ -77,11 +66,9 @@ public class AdministrarSubordinados extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_btnRegresarActionPerformed
 
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnRegresar;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     // End of variables declaration//GEN-END:variables
 }

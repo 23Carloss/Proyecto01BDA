@@ -4,17 +4,20 @@
  */
 package presentacion;
 
+import control.ControlEmpleado;
+
 /**
  *
  * @author jalt2
  */
 public class MenuJefe extends javax.swing.JFrame {
-
+    private ControlEmpleado control;
     /**
      * Creates new form MenuJefe
      */
-    public MenuJefe() {
+    public MenuJefe(ControlEmpleado control) {
         initComponents();
+        this.control=control;
     }
 
     /**
@@ -35,9 +38,6 @@ public class MenuJefe extends javax.swing.JFrame {
         administrarPrestamos = new javax.swing.JMenuItem();
         menuPrestamo = new javax.swing.JMenu();
         realizarPrestamo = new javax.swing.JMenuItem();
-        jMenu3 = new javax.swing.JMenu();
-        jMenu4 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,9 +54,19 @@ public class MenuJefe extends javax.swing.JFrame {
         menuAdministracion.add(administrarSubordinado);
 
         administrarEmpleado.setText("Administrar Empleados");
+        administrarEmpleado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                administrarEmpleadoActionPerformed(evt);
+            }
+        });
         menuAdministracion.add(administrarEmpleado);
 
         administrarPrestamos.setText("Administrar Prestamos");
+        administrarPrestamos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                administrarPrestamosActionPerformed(evt);
+            }
+        });
         menuAdministracion.add(administrarPrestamos);
 
         jMenuBar1.add(menuAdministracion);
@@ -67,15 +77,6 @@ public class MenuJefe extends javax.swing.JFrame {
         menuPrestamo.add(realizarPrestamo);
 
         jMenuBar1.add(menuPrestamo);
-
-        jMenu3.setText("jMenu3");
-        jMenuBar1.add(jMenu3);
-
-        jMenu4.setText("jMenu4");
-        jMenuBar1.add(jMenu4);
-
-        jMenu5.setText("jMenu5");
-        jMenuBar1.add(jMenu5);
 
         setJMenuBar(jMenuBar1);
 
@@ -101,7 +102,19 @@ public class MenuJefe extends javax.swing.JFrame {
 
     private void administrarSubordinadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarSubordinadoActionPerformed
         // TODO add your handling code here:
+        control.iniciarFrmSubordinados();
+        this.dispose();
     }//GEN-LAST:event_administrarSubordinadoActionPerformed
+
+    private void administrarEmpleadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarEmpleadoActionPerformed
+        // TODO add your handling code here:
+        control.iniciarFrmEmpleados();
+    }//GEN-LAST:event_administrarEmpleadoActionPerformed
+
+    private void administrarPrestamosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administrarPrestamosActionPerformed
+        // TODO add your handling code here:
+        control.iniciarFrmPrestamos();
+    }//GEN-LAST:event_administrarPrestamosActionPerformed
 
     
 
@@ -111,9 +124,6 @@ public class MenuJefe extends javax.swing.JFrame {
     private javax.swing.JMenuItem administrarSubordinado;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu menuAdministracion;
     private javax.swing.JMenu menuPrestamo;
