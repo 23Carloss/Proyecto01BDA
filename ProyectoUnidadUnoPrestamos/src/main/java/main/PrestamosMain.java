@@ -4,6 +4,9 @@
  */
 package main;
 
+import control.ControlEmpleado;
+import presentacion.Login;
+
 /**
  *
  * @author jalt2
@@ -15,6 +18,10 @@ public class PrestamosMain {
      */
     public static void main(String[] args) {
         // TODO code application logic here
+        ControlEmpleado control = new ControlEmpleado();
+        Login login = new Login(control);
+        login.setVisible(true);
+        login.setLocationRelativeTo(null);
     }
     
 }

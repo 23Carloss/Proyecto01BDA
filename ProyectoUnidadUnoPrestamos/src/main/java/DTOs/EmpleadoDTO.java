@@ -11,14 +11,18 @@ package DTOs;
  */
 public class EmpleadoDTO {
     private String Nombre, ApellidoPaterno,ApellidoMaterno;
+    private String password;
+    private String tipo;
 
     public EmpleadoDTO() {
     }
 
-    public EmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno) {
+    public EmpleadoDTO(String Nombre, String ApellidoPaterno, String ApellidoMaterno,String password,String tipo) {
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
         this.ApellidoMaterno = ApellidoMaterno;
+        this.password = password;
+        this.tipo = tipo;
     }
 
     public String getNombre() {
@@ -45,6 +49,24 @@ public class EmpleadoDTO {
         this.ApellidoMaterno = ApellidoMaterno;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
+    }
+    
+    
+    
     @Override
     public String toString() {
         return "EmpleadoDTO{" + "Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + '}';
