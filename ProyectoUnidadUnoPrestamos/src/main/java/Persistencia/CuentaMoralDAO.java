@@ -25,6 +25,7 @@ public class CuentaMoralDAO implements ICuentaMoralDAO {
         this.conexionBD = conexionBD;
     }
 
+    @Override
     public CuentaMoral consultarPorClabe(String clabe) throws PersistenciaException {
         String cuentaMoral = """
                              SELECT clabeMoral, saldoPresupuestal, nombreBanco
@@ -52,6 +53,7 @@ public class CuentaMoralDAO implements ICuentaMoralDAO {
 
     }
 
+    @Override
     public boolean actualizarSaldo(String clabe, BigDecimal nuevoSaldo) throws PersistenciaException {
         String update = """
                         UPDATE CuentaMoral

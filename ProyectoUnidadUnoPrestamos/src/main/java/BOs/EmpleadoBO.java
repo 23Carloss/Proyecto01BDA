@@ -40,22 +40,38 @@ public class EmpleadoBO implements IEmpleadoBO {
 
     @Override
     public List<RegistrarEmpleadoDTO> consultarEmpleadosPorJefe(String idJefe) {
-        return this.empleadoDAO.consultarEmpleadosPorJefe(idJefe);
+//        return this.empleadoDAO.consultarEmpleadosPorJefe(idJefe);
+        throw new UnsupportedOperationException();
     }
 
     @Override
     public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException {
-        return empleadoDAO.registrarEmpleado(nuevoEmpleado);
+        if (nuevoEmpleado == null) {
+            throw new NegocioException("El id es null");
+        }
+        try {
+            return adapter.convertirADTORegistrar(this.empleadoDAO.registrarEmpleado(nuevoEmpleado));
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
+        }
     }
 
     @Override
     public List<DepartamentoDTO> consultarDepartamentos() throws NegocioException {
-        return empleadoDAO.consultarDepartamentos();
+        try {
+            return empleadoDAO.consultarDepartamentos();
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
+        }
     }
 
     @Override
     public int eliminarEmpleado(String id) throws NegocioException {
-        return empleadoDAO.eliminarEmpleado(id);
+        try {
+            return empleadoDAO.eliminarEmpleado(id);
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
+        }
     }
     
     
