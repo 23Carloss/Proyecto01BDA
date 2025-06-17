@@ -4,6 +4,7 @@
  */
 package persistencia;
 
+import DTOs.CuentaMoralDTO;
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
 import Dominio.CuentaFisica;
@@ -59,8 +60,8 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                 ResultSet resultSet = preparedStatement.executeQuery();
                 
                Departamento departamento1 = consultarDepartamentoEmpleado(resultSet.getNString("idDepartamento"));
-
-                while(resultSet.next()){ // que hace esta linea de codigo? Va consultando los registros de la tabla?
+               
+                while(resultSet.next()){ 
                     EmpleadoEncontrado.setId(resultSet.getNString("idEmpleado"));
                     EmpleadoEncontrado.setNombre(resultSet.getNString("nombre"));
                     EmpleadoEncontrado.setApellidoPaterno(resultSet.getNString("apellidoPaternoo"));
@@ -68,19 +69,20 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                     EmpleadoEncontrado.setEstaActivo(resultSet.getBoolean("estaActivo"));
                     EmpleadoEncontrado.setTipo(resultSet.getNString("tipo"));
                     
-                    //Departamento
+                    //Listas de las cuentas morales de los Departamento y los Depas
                     departamento1.setlistaMoral(consultarCuentasPorDepartamento(resultSet.getNString("idDepartamento")));
                     EmpleadoEncontrado.setDepartamento(departamento1);
                     
 
                 }
-                resultSet.close();
-                preparedStatement.close();
-                conexion.close();
+                
 
                 if(EmpleadoEncontrado == null){
                     throw new PersistenciaException("Error al busar empleado con id:  " + id);
                 }
+                resultSet.close();
+                preparedStatement.close();
+                conexion.close();
                 return EmpleadoEncontrado;
             }catch(SQLException ex){
                 throw new PersistenciaException("Error al buscar el empleado:  " + ex.getMessage());
@@ -107,19 +109,22 @@ public class EmpleadoDAO implements IEmpleadoDAO{
             PreparedStatement preparedStatement = conexion.prepareStatement(comando);
             preparedStatement.setString(0, nuevoEmpleado.getNombre());
             preparedStatement.setString(1, nuevoEmpleado.getApellidoPaterno());
-            preparedStatement.setString(2, nuevoEmpleado.getApellidoMaterno());           
-            ResultSet resultSet = preparedStatement.executeQuery();
-            
-            while(resultSet.next()){
-                empleadoNuevo.setNombre(nuevoEmpleado.getNombre());
+            preparedStatement.setString(2, nuevoEmpleado.getApellidoMaterno());  
+            int filasAfectadas = preparedStatement.executeUpdate();
+            //creamos Empleado
+            empleadoNuevo.setNombre(nuevoEmpleado.getNombre());
                 empleadoNuevo.setApellidoPaterno(nuevoEmpleado.getNombre());
                 empleadoNuevo.setApellidoMaterno(nuevoEmpleado.getNombre());             
                 empleadoNuevo.setDepartamento(AdaptadorDepartamento.convertirADominio(nuevoEmpleado.getDepartamento()));
                 empleadoNuevo.setTipo(nuevoEmpleado.getTipo());
                 empleadoNuevo.setUsuario(nuevoEmpleado.getUsuario());
                 empleadoNuevo.setPassword(nuevoEmpleado.getPassword());
-                
+            if(filasAfectadas == 0){
+                throw new PersistenciaException("Error al insertar el empleado: ");
             }
+           
+            preparedStatement.close();
+            conexion.close();
             return empleadoNuevo;
              }catch (SQLException ex) {
                 throw new PersistenciaException("Error al insertar el empleado: "+  ex.getMessage());
@@ -131,10 +136,11 @@ public class EmpleadoDAO implements IEmpleadoDAO{
     
     /*Consulta de todos los departamentos*/
     @Override
-    public List<DepartamentoDTO> consultarDepartamentos() {
+    public List<DepartamentoDTO> consultarDepartamentos() throws PersistenciaException {
         
         try {
             List<DepartamentoDTO> listaResultados =  new ArrayList<>();
+            List<CuentaMoralDTO> listaMoral =  new ArrayList<>();
             DepartamentoDTO depa = new DepartamentoDTO();
             Connection conexion = this.conexion.crearConexion();
             String comando = """
@@ -144,14 +150,15 @@ public class EmpleadoDAO implements IEmpleadoDAO{
             PreparedStatement preparedStatement = conexion.prepareStatement(comando);
             ResultSet resultSet = preparedStatement.executeQuery();
             for (CuentaMoral cuenta : consultarCuentasPorDepartamento(resultSet.getNString("clabeMoral"))) {
-                    
+                    listaMoral.add(AdaptadorCuentaMoral.convertirADTO(cuenta));
             }
             while(resultSet.next()){
-                
-                depa.setListaCuentas(consultarCuentasPorDepartamento(resultSet.getNString("clabeMoral")));
+                depa.setListaCuentas(listaMoral);
                 depa.setNombre(resultSet.getNString("nombre"));
                 depa.setSaldoPresupuesto(resultSet.getNString("SaldoPresupuesto"));
+                listaResultados.add(depa);
             }
+            return listaResultados;
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -159,8 +166,26 @@ public class EmpleadoDAO implements IEmpleadoDAO{
 
     /*Delete a un empleado*/
     @Override
-    public int eliminarEmpleado(String id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    public int eliminarEmpleado(String id) throws PersistenciaException {
+        try {
+            Connection conexion = this.conexion.crearConexion();
+            String comando = """
+                                     delete from Empleados
+                                     where idEmpleado = ?;
+                                     """;
+            PreparedStatement preparedStatement = conexion.prepareStatement(comando);
+            preparedStatement.setString(0, id);
+            int filasAfectadas = preparedStatement.executeUpdate();
+            if(filasAfectadas == 0){
+                throw new PersistenciaException("Error al insertar el empleado: ");
+            }
+           
+            preparedStatement.close();
+            conexion.close();
+            return filasAfectadas;
+        } catch (SQLException ex) {
+            throw new PersistenciaException("Error al insertar el empleado: " + ex.getMessage());
+        }
     }
     
 
