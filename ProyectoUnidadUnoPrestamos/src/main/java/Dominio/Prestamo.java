@@ -4,39 +4,51 @@
  */
 package Dominio;
 
+import java.math.BigDecimal;
+
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
  */
 public class Prestamo {
 
-    private int id;
-    private Double adeudo;
+    private String idPrestamo;
+    private BigDecimal adeudo;
+    private String idTipoDePrestamo;
 
-    public Prestamo(int id, Double adeudo) {
-        this.id = id;
+    public Prestamo(String idPrestamo, BigDecimal adeudo, String idTipoDePrestamo) {
+        this.idPrestamo = idPrestamo;
         this.adeudo = adeudo;
+        this.idTipoDePrestamo = idTipoDePrestamo;
     }
 
-    public int getId() {
-        return id;
+    public String getIdPrestamo() {
+        return idPrestamo;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdPrestamo(String idPrestamo) {
+        this.idPrestamo = idPrestamo;
     }
 
-    public Double getAdeudo() {
+    public BigDecimal getAdeudo() {
         return adeudo;
     }
 
-    public void setAdeudo(Double adeudo) {
+    public void setAdeudo(BigDecimal adeudo) {
         this.adeudo = adeudo;
+    }
+
+    public String getIdTipoDePrestamo() {
+        return idTipoDePrestamo;
+    }
+
+    public void setIdTipoDePrestamo(String idTipoDePrestamo) {
+        this.idTipoDePrestamo = idTipoDePrestamo;
     }
 
     @Override
     public String toString() {
-        return "Prestamo{" + "id=" + id + ", adeudo=" + adeudo + '}';
+        return "Prestamo{" + "idPrestamo=" + idPrestamo + ", adeudo=" + adeudo + ", idTipoDePrestamo=" + idTipoDePrestamo + '}';
     }
 
 }
