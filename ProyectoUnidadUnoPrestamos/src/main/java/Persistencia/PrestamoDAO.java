@@ -4,7 +4,6 @@ import DTOs.PrestamoDTO;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
-import persistencia.IConexionBD;
 
 /**
  *
@@ -40,7 +39,7 @@ public class PrestamoDAO {
 
             try (ResultSet rs = stmt.getResultSet()) {
                 if (rs.next()) {
-                    return rs.getInt(1); // Retorna el ID del préstamo
+                    return rs.getInt(1); //retorna el id del prestamo
                 }
             }
 
