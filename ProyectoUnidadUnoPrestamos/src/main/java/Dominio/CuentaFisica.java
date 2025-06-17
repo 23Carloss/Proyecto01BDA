@@ -13,6 +13,7 @@ public class CuentaFisica {
     private String Clabe;
     private String NombreBanco;
     private String estatus;
+    private double SaldoPresupuesto;
 
     public CuentaFisica() {
     }
@@ -47,10 +48,17 @@ public class CuentaFisica {
         this.estatus = estatus;
     }
 
+    public double getSaldoPresupuesto() {
+        return SaldoPresupuesto;
+    }
+
+    public void setSaldoPresupuesto(double SaldoPresupueto) {
+        this.SaldoPresupuesto = SaldoPresupueto;
+    }
+
     @Override
     public String toString() {
-        return "CuentaEmpleado{" + "Clabe=" + Clabe + ", NombreBanco=" + NombreBanco + ", estatus=" + estatus + '}';
+        return "CuentaFisica{" + "Clabe=" + Clabe + ", NombreBanco=" + NombreBanco + ", estatus=" + estatus + ", SaldoPresupueto=" + SaldoPresupuesto + '}';
     }
-    
-    
+  
 }

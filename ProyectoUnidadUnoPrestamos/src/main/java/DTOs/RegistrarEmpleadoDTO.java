@@ -5,6 +5,8 @@
 
 package DTOs;
 
+import java.util.List;
+
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
@@ -17,6 +19,7 @@ public class RegistrarEmpleadoDTO {
     private String usuario;
     private DepartamentoDTO departamento;
     private EmpleadoJefeDTO Jefe;
+    private List<CuentaFisicaDTO> listaCuentas;
 
     public RegistrarEmpleadoDTO() {
     }
@@ -32,7 +35,7 @@ public class RegistrarEmpleadoDTO {
         this.Jefe = jefe;
     }
 
-    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, DepartamentoDTO departamento) {
+    public RegistrarEmpleadoDTO(String id, String Nombre, String ApellidoPaterno, String ApellidoMaterno, String password, String tipo, DepartamentoDTO departamento,String usuario) {
         this.id = id;
         this.Nombre = Nombre;
         this.ApellidoPaterno = ApellidoPaterno;
@@ -43,8 +46,6 @@ public class RegistrarEmpleadoDTO {
         this.departamento = departamento;
     }
     
-    
-
     public String getNombre() {
         return Nombre;
     }
@@ -101,10 +102,36 @@ public class RegistrarEmpleadoDTO {
         this.id = id;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public EmpleadoJefeDTO getJefe() {
+        return Jefe;
+    }
+
+    public void setJefe(EmpleadoJefeDTO Jefe) {
+        this.Jefe = Jefe;
+    }
+
+    public List<CuentaFisicaDTO> getListaCuentas() {
+        return listaCuentas;
+    }
+
+    public void setListaCuentas(List<CuentaFisicaDTO> listaCuentas) {
+        this.listaCuentas = listaCuentas;
+    }
+
     @Override
     public String toString() {
-        return "RegistrarEmpleadoDTO{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", tipo=" + tipo + ", departamento=" + departamento + '}';
+        return "RegistrarEmpleadoDTO{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", tipo=" + tipo + ", usuario=" + usuario + ", departamento=" + departamento + ", Jefe=" + Jefe + ", listaCuentas=" + listaCuentas + '}';
     }
+
+   
     
     
     

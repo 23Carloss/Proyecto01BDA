@@ -13,12 +13,17 @@ public class CuentaFisicaDTO {
     private String Clabe;
     private String NombreBanco;
     private String estatus;
+    private double SaldoPresupueto;
 
     public CuentaFisicaDTO(String Clabe, String NombreBanco, String estatus) {
         this.Clabe = Clabe;
         this.NombreBanco = NombreBanco;
         this.estatus = estatus;
     }
+
+    public CuentaFisicaDTO() {
+    }
+    
 
     public String getClabe() {
         return Clabe;
@@ -44,10 +49,17 @@ public class CuentaFisicaDTO {
         this.estatus = estatus;
     }
 
+    public double getSaldoPresupueto() {
+        return SaldoPresupueto;
+    }
+
+    public void setSaldoPresupueto(double SaldoPresupueto) {
+        this.SaldoPresupueto = SaldoPresupueto;
+    }
+
     @Override
     public String toString() {
-        return "CuentaEmpleadoDTO{" + "Clabe=" + Clabe + ", NombreBanco=" + NombreBanco + ", estatus=" + estatus + '}';
+        return "CuentaFisicaDTO{" + "Clabe=" + Clabe + ", NombreBanco=" + NombreBanco + ", estatus=" + estatus + ", SaldoPresupueto=" + SaldoPresupueto + '}';
     }
-    
     
 }

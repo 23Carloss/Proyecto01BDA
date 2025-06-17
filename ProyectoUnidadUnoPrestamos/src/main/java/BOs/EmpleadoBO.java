@@ -6,16 +6,21 @@ package BOs;
 
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
+import IAdaptadores.IAdaptadorEmpleado;
+import Persistencia.PersistenciaException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import persistencia.IEmpleadoDAO;
 
 /**
- *
  * @author jalt2 
  */
 public class EmpleadoBO implements IEmpleadoBO {
     private IEmpleadoDAO empleadoDAO;
+    private IAdaptadorEmpleado adapter;
 
+    
     public EmpleadoBO(IEmpleadoDAO empleadoDAO) {
         this.empleadoDAO = empleadoDAO;
     }
@@ -25,8 +30,12 @@ public class EmpleadoBO implements IEmpleadoBO {
         if (id == null) {
             throw new NegocioException("El id es null");
         }
-        
-        return this.empleadoDAO.consultarPorId(id);
+        try {
+            return adapter.convertirADTORegistrar(this.empleadoDAO.consultarPorId(id));
+        } catch (PersistenciaException ex) {
+            throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
+        }
+         
     }
 
     @Override

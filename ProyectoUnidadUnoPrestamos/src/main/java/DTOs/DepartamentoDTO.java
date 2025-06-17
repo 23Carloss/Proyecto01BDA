@@ -13,7 +13,7 @@ import java.util.List;
 public class DepartamentoDTO {
     private String nombre;
     private String saldoPresupuesto;
-    private List<CuentaMoralDTO> listaEstado;
+    private List<CuentaMoralDTO> listaCuentas;
 
     public DepartamentoDTO(String nombre, String saldoPresupuesto) {
         this.nombre = nombre;
@@ -39,14 +39,18 @@ public class DepartamentoDTO {
         this.saldoPresupuesto = saldoPresupuesto;
     }
 
-    public List<CuentaMoralDTO> getListaEstado() {
-        return listaEstado;
+    public List<CuentaMoralDTO> getListaCuentas() {
+        return listaCuentas;
     }
 
-    public void setListaEstado(List<CuentaMoralDTO> listaEstado) {
-        this.listaEstado = listaEstado;
+    public void setListaCuentas(List<CuentaMoralDTO> listaCuentas) {
+        this.listaCuentas = listaCuentas;
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "DepartamentoDTO{" + "nombre=" + nombre + ", saldoPresupuesto=" + saldoPresupuesto + ", listaCuentas=" + listaCuentas + '}';
+    }
+   
     
 }
