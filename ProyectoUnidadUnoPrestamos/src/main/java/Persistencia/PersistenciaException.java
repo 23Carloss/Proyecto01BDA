@@ -4,6 +4,8 @@
  */
 package Persistencia;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author Sandra
@@ -11,6 +13,10 @@ package Persistencia;
 public class PersistenciaException extends Exception{
     public PersistenciaException(String m){
         super(m);
+    }
+
+    PersistenciaException(String string, SQLException ex) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
 }

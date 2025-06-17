@@ -154,4 +154,3 @@ INSERT INTO Empleado VALUES
 ('00007890', 'Albert', 'Einstein', '', 'albert.einstein', 'relatividad1', '00007890', '014180000147258369'),
 ('00001234', 'William', 'Henry Gates', '', 'bill.gates', '1234', '00001234', '014180000876543210'),
 ('00009987', 'Ada', 'Lovelace', '', 'ada.lovelace', 'lovelace42', '00009987', '021180000123123123');
-

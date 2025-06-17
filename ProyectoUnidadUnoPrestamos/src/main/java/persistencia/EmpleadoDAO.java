@@ -216,6 +216,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
             throw new PersistenciaException("Error al consultar cuentas: "+ ex.getMessage());
         }     
     }
+     
     
     private Departamento consultarDepartamentoEmpleado(String idDepartamento) throws PersistenciaException{
         try {
