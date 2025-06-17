@@ -4,6 +4,7 @@
  */
 package DTOs;
 
+import Dominio.CuentaMoral;
 import java.util.List;
 
 /**
@@ -15,7 +16,7 @@ public class DepartamentoDTO {
     private String saldoPresupuesto;
     private List<CuentaMoralDTO> listaCuentas;
 
-    public DepartamentoDTO(String nombre, String saldoPresupuesto) {
+    public DepartamentoDTO(String nombre, String saldoPresupuesto, List<CuentaMoral> listaMoral) {
         this.nombre = nombre;
         this.saldoPresupuesto = saldoPresupuesto;
     }

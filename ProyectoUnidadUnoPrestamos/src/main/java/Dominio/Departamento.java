@@ -48,8 +48,4 @@ public class Departamento{
     public void setlistaMoral(List<CuentaMoral> listaEstado) {
         this.listaMoral = listaEstado;
     }
-
-   
-    
-    
 }
