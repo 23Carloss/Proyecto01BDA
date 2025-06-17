@@ -44,27 +44,29 @@ public class EmpleadoDAO implements IEmpleadoDAO{
     @Override
     public Empleado consultarPorId(String id) throws PersistenciaException {
             try{
+                System.out.println("Llega aqui al picarle al bton sesion?DAOOO");
+                System.out.println("ID que llega a la DAO : " + id);
                 
-                CuentaMoral cuentaMoral = new CuentaMoral();
                 Empleado EmpleadoEncontrado = new Empleado();
                 Connection conexion = this.conexion.crearConexion();
                 
                 String comando = """
-                                 select Empleado, nombre, ApellidoPaterno, ApellidoMaterno
+                                 select idEmpleado, nombre, ApellidoPaterno, ApellidoMaterno
                                  from Empleado 
                                  where idEmpleado = ?;
                                  """;
 
                 PreparedStatement preparedStatement = conexion.prepareStatement(comando);
-                preparedStatement.setString(0 , id);
+                preparedStatement.setString(1 , id);
                 ResultSet resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                Departamento departamento1 = consultarDepartamentoEmpleado(resultSet.getNString("idDepartamento"));
+                System.out.println("pasa las consultas? : ");
+                 System.out.println("Nombre del banco del wey con id: " + id + "Banco: "+ departamento1.getNombre());
                 
-               Departamento departamento1 = consultarDepartamentoEmpleado(resultSet.getNString("idDepartamento"));
-               
-                while(resultSet.next()){ 
                     EmpleadoEncontrado.setId(resultSet.getNString("idEmpleado"));
                     EmpleadoEncontrado.setNombre(resultSet.getNString("nombre"));
-                    EmpleadoEncontrado.setApellidoPaterno(resultSet.getNString("apellidoPaternoo"));
+                    EmpleadoEncontrado.setApellidoPaterno(resultSet.getNString("apellidoPaterno"));
                     EmpleadoEncontrado.setApellidoMaterno(resultSet.getNString("apellidoMaterno"));
                     EmpleadoEncontrado.setEstaActivo(resultSet.getBoolean("estaActivo"));
                     EmpleadoEncontrado.setTipo(resultSet.getNString("tipo"));
@@ -72,17 +74,17 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                     //Listas de las cuentas morales de los Departamento y los Depas
                     departamento1.setlistaMoral(consultarCuentasPorDepartamento(resultSet.getNString("idDepartamento")));
                     EmpleadoEncontrado.setDepartamento(departamento1);
+                    System.out.println(EmpleadoEncontrado.toString());
                     
-
                 }
-                
-
                 if(EmpleadoEncontrado == null){
                     throw new PersistenciaException("Error al busar empleado con id:  " + id);
                 }
                 resultSet.close();
                 preparedStatement.close();
                 conexion.close();
+                System.out.println("empleado encontrado desde anters del return de la DAO");
+                System.out.println(EmpleadoEncontrado.toString());
                 return EmpleadoEncontrado;
             }catch(SQLException ex){
                 throw new PersistenciaException("Error al buscar el empleado:  " + ex.getMessage());
@@ -162,6 +164,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
         } catch (SQLException ex) {
             Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
+        return null;
     }
 
     /*Delete a un empleado*/
@@ -171,10 +174,11 @@ public class EmpleadoDAO implements IEmpleadoDAO{
             Connection conexion = this.conexion.crearConexion();
             String comando = """
                                      delete from Empleados
-                                     where idEmpleado = ?;
+                                     where idEmpleado = ?
+                                     limit 1;
                                      """;
             PreparedStatement preparedStatement = conexion.prepareStatement(comando);
-            preparedStatement.setString(0, id);
+            preparedStatement.setString(1, id);
             int filasAfectadas = preparedStatement.executeUpdate();
             if(filasAfectadas == 0){
                 throw new PersistenciaException("Error al insertar el empleado: ");
@@ -201,7 +205,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                                            """;
             
             PreparedStatement cuentaMoral1 = conexion.prepareStatement(consultaCuentaMoral);
-            cuentaMoral1.setString(0, clabeMoral);
+            cuentaMoral1.setString(1, clabeMoral);
             ResultSet InfoCuenta = cuentaMoral1.executeQuery();
             
             while(InfoCuenta.next()){
@@ -227,7 +231,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                                            """;
             
             PreparedStatement cuentaMoral1 = conexion.prepareStatement(consultaCuentaMoral);
-            cuentaMoral1.setString(0, clabeFisica);
+            cuentaMoral1.setString(1, clabeFisica);
             ResultSet InfoCuenta = cuentaMoral1.executeQuery();
             
             while(InfoCuenta.next()){
@@ -253,7 +257,7 @@ public class EmpleadoDAO implements IEmpleadoDAO{
                                                where idDepartamento = ?;
                                                """;
             PreparedStatement departamento = conexion.prepareStatement(consultaDepartamento);
-            departamento.setString(0, idDepartamento);
+            departamento.setString(1, idDepartamento);
             ResultSet InfoDepartamento = departamento.executeQuery();
             while(InfoDepartamento.next()){
                 depa.setNombre(InfoDepartamento.getNString("Nombre"));

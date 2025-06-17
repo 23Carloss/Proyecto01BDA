@@ -25,13 +25,14 @@ public class EmpleadoFacade implements IEmpleadoFacade{
     public EmpleadoFacade() {
         IConexionBD conexion = new ConexionBD();
         IEmpleadoDAO empleadoDAO = new EmpleadoDAO(conexion);
-//        this.empleadoNegocio = new EmpleadoBO(empleadoDAO);
+        this.empleadoNegocio = new EmpleadoBO(empleadoDAO);
         
     }
     
 
     @Override
     public RegistrarEmpleadoDTO consultarPorId(String id) throws NegocioException{
+        System.out.println("desde facade: " + empleadoNegocio.consultarPorId(id).toString());
         return this.empleadoNegocio.consultarPorId(id);
     }
 

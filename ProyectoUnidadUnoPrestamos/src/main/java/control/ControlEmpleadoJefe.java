@@ -36,14 +36,16 @@ public class ControlEmpleadoJefe {
     private MostrarEmpleados frmMostrarEmpleados;
     private AdministrarPrestamos frmPrestamos;
     private Login frmLogin;
+    private EmpleadoFacade facade; 
 
     public ControlEmpleadoJefe() {
+        facade = new EmpleadoFacade();
     }
     
     
     /*Este metodo recibe id y contraseña del login y lo compara con lo que hay en la base de datos*/
     public boolean iniciarSesion(String id, String password) throws NegocioException{
-        EmpleadoFacade facade = new EmpleadoFacade();
+        
         empleadoActual = facade.consultarPorId(id);
         
         if (empleadoActual.getPassword().equals(password) && empleadoActual.getTipo().equals("Jefe")) {

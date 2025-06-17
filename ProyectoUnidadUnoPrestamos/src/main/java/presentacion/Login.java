@@ -50,6 +50,11 @@ public class Login extends javax.swing.JFrame {
 
         btnInicioSesion.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btnInicioSesion.setText("Iniciar Sesion");
+        btnInicioSesion.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnInicioSesionMouseClicked(evt);
+            }
+        });
         btnInicioSesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnInicioSesionActionPerformed(evt);
@@ -108,6 +113,11 @@ public class Login extends javax.swing.JFrame {
 
     private void btnInicioSesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInicioSesionActionPerformed
         // TODO add your handling code here:
+        
+    }//GEN-LAST:event_btnInicioSesionActionPerformed
+
+    private void btnInicioSesionMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnInicioSesionMouseClicked
+        // TODO add your handling code here:
         try {
             String usuario = this.txtUsuario.getText();
             String password = this.txtContrasena.getText();
@@ -122,7 +132,7 @@ public class Login extends javax.swing.JFrame {
         } catch (Exception e) {
             
         }
-    }//GEN-LAST:event_btnInicioSesionActionPerformed
+    }//GEN-LAST:event_btnInicioSesionMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

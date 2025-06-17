@@ -4,6 +4,7 @@
  */
 package BOs;
 
+import Adaptadores.AdaptadorEmpleado;
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
 import IAdaptadores.IAdaptadorEmpleado;
@@ -17,20 +18,25 @@ import persistencia.IEmpleadoDAO;
  * @author jalt2 
  */
 public class EmpleadoBO implements IEmpleadoBO {
+    
     private IEmpleadoDAO empleadoDAO;
     private IAdaptadorEmpleado adapter;
 
     
     public EmpleadoBO(IEmpleadoDAO empleadoDAO) {
         this.empleadoDAO = empleadoDAO;
+        this.adapter = new AdaptadorEmpleado();
     }
 
     @Override
     public RegistrarEmpleadoDTO consultarPorId(String id) throws NegocioException{
+        System.out.println("Entra a la BO??");
         if (id == null) {
             throw new NegocioException("El id es null");
         }
         try {
+            System.out.println("Llega aqui al picarle al bton sesion?BOOOOO");
+            
             return adapter.convertirADTORegistrar(this.empleadoDAO.consultarPorId(id));
         } catch (PersistenciaException ex) {
             throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
@@ -46,10 +52,11 @@ public class EmpleadoBO implements IEmpleadoBO {
 
     @Override
     public RegistrarEmpleadoDTO registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) throws NegocioException {
-        if (nuevoEmpleado == null) {
-            throw new NegocioException("El id es null");
-        }
+        
         try {
+            if (nuevoEmpleado == null) {
+                throw new NegocioException("El id es null");
+            }
             return adapter.convertirADTORegistrar(this.empleadoDAO.registrarEmpleado(nuevoEmpleado));
         } catch (PersistenciaException ex) {
             throw new NegocioException("Error al registrar Empleado: "+ ex.getMessage());
