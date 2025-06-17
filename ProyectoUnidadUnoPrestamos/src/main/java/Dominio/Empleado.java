@@ -5,6 +5,8 @@
 
 package Dominio;
 
+import java.util.List;
+
 /**
  *
  * @author $Luis Carlos Manjarrez Gonzalez
@@ -17,6 +19,7 @@ public class Empleado {
     private String tipo;
     private Departamento departamento;
     private Boolean estaActivo; 
+    private List<CuentaFisica> listaCuenta ;
 
     
     public Empleado() {
@@ -109,11 +112,18 @@ public class Empleado {
         this.estaActivo = estaActivo;
     }
 
-    @Override
-    public String toString() {
-        return "Empleado{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", usuario=" + usuario + ", tipo=" + tipo + ", departamento=" + departamento + ", estaActivo=" + estaActivo + '}';
+    public List<CuentaFisica> getListaCuenta() {
+        return listaCuenta;
     }
 
-   
+    public void setListaCuenta(List<CuentaFisica> listaCuenta) {
+        this.listaCuenta = listaCuenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Empleado{" + "id=" + id + ", Nombre=" + Nombre + ", ApellidoPaterno=" + ApellidoPaterno + ", ApellidoMaterno=" + ApellidoMaterno + ", password=" + password + ", usuario=" + usuario + ", tipo=" + tipo + ", departamento=" + departamento + ", estaActivo=" + estaActivo + ", listaCuenta=" + listaCuenta + '}';
+    }
+
     
 }

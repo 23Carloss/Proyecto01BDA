@@ -14,7 +14,7 @@ import java.util.List;
 public class Departamento{ 
     private String nombre;
     private String saldoPresupuesto;
-    private List<CuentaMoral> listaMoral  ;
+    private List<CuentaMoral> listaMoral;
 
     public Departamento() {
     }

@@ -6,16 +6,21 @@ package persistencia;
 
 import DTOs.DepartamentoDTO;
 import DTOs.RegistrarEmpleadoDTO;
+import Dominio.CuentaMoral;
+import Dominio.Departamento;
 import Dominio.Empleado;
 import IAdaptadores.IAdaptadorEmpleado;
+import Persistencia.IConexionBD;
 import Persistencia.PersistenciaException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import persistencia.IEmpleadoDAO;
 
 /**
  *
@@ -32,37 +37,52 @@ public class EmpleadoDAO implements IEmpleadoDAO{
 //    Aqui los metodos de esta DAO
 
 
-    
     public Empleado consultarPorId(int id) throws PersistenciaException {
             try{
-            Connection conexion = this.conexion.crearConexion();
-            String comando = """
-                             select id_Alumno, nombre, ApellidoPaterno, ApellidoMaterno, estaActivo, estaEliminado
-                             from Alumnos 
-                             where id_Alumno = ?;
-                             """;
-            PreparedStatement preparedStatement = conexion.prepareStatement(comando);
-            preparedStatement.setInt(1, id); // no entiendo que hace esta linea especifiamente
-            
-            ResultSet resultSet = preparedStatement.executeQuery();
-            Empleado EmpleadoEncontrado = null;
-            while(resultSet.next()){ // que hace esta linea de codigo? Va consultando los registros de la tabla?
-                EmpleadoEncontrado = ConvertirADominio(resultSet);
+                
+                CuentaMoral cuentaMoral = new CuentaMoral();
+                Empleado EmpleadoEncontrado = new Empleado();
+                Connection conexion = this.conexion.crearConexion();
+                
+                String comando = """
+                                 select Empleado, nombre, ApellidoPaterno, ApellidoMaterno
+                                 from Empleado 
+                                 where idEmpleado = ?;
+                                 """;
+
+                PreparedStatement preparedStatement = conexion.prepareStatement(comando);
+                preparedStatement.setInt(0 , id);
+                ResultSet resultSet = preparedStatement.executeQuery();
+                
+               Departamento departamento1 = consultarDepartamentoEmpleado(resultSet.getNString("idDepartamento"));
+
+                while(resultSet.next()){ // que hace esta linea de codigo? Va consultando los registros de la tabla?
+                    EmpleadoEncontrado.setId(resultSet.getNString("idEmpleado"));
+                    EmpleadoEncontrado.setNombre(resultSet.getNString("nombre"));
+                    EmpleadoEncontrado.setApellidoPaterno(resultSet.getNString("apellidoPaternoo"));
+                    EmpleadoEncontrado.setApellidoMaterno(resultSet.getNString("apellidoMaterno"));
+                    EmpleadoEncontrado.setEstaActivo(resultSet.getBoolean("estaActivo"));
+                    EmpleadoEncontrado.setTipo(resultSet.getNString("tipo"));
+                    
+                    //Departamento
+                    departamento1.setlistaMoral(consultarCuentasPorDepartamento(resultSet.getNString("idDepartamento")));
+                    EmpleadoEncontrado.setDepartamento(departamento1);
+                    
+
+                }
+
+                resultSet.close();
+                preparedStatement.close();
+                conexion.close();
+
+                if(EmpleadoEncontrado == null){
+                    throw new PersistenciaException("Error al busar empleado con id:  " + id);
+                }
+                return EmpleadoEncontrado;
+            }catch(SQLException ex){
+                throw new PersistenciaException("Error al buscar el empleado:  " + ex.getMessage());
+                }
             }
-            
-            resultSet.close();
-            preparedStatement.close();
-            conexion.close();
-            
-            if(EmpleadoEncontrado == null){
-                throw new PersistenciaException("Error al busar alumno con id:  " + id);
-            }
-            return EmpleadoEncontrado;
-        }catch(SQLException ex){
-            throw new PersistenciaException("Error al buscar el alumno:  " + ex.getMessage());
-        }
-        }
-    
     
     /*Buscar los empleados de los que esta acargo un jefe*/
     @Override
@@ -73,22 +93,26 @@ public class EmpleadoDAO implements IEmpleadoDAO{
     /*Insert*/
     @Override
     public Empleado registrarEmpleado(RegistrarEmpleadoDTO nuevoEmpleado) {
-        if(nuevoEmpleado.getTipo().equals("Jefe")){
-           
+        try {
+            Connection conexion = this.conexion.crearConexion();
             String comando = """
                             Insert into Empleado(nombre, apellidoPaterno,apellidoPaterno,)
-                            values
+                            values(?,?,?)
                          """;
-        }else{
-            try {
-                throw new PersistenciaException("Error al insertar el empleado.");
-            } catch (PersistenciaException ex) {
-                Logger.getLogger(EmpleadoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            PreparedStatement preparedStatement = conexion.prepareStatement(comando);
+            preparedStatement.setString(0, nuevoEmpleado.getNombre());
+            preparedStatement.setString(1, nuevoEmpleado.getApellidoPaterno());
+            preparedStatement.setString(2, nuevoEmpleado.getApellidoMaterno());
+            
+            ResultSet resultSet = preparedStatement.executeQuery();
+            } catch (SQLException ex) {
+                throw new PersistenciaException("Error al insertar el empleado: "+  ex.getMessage());
             }
-        }
         return null;
+        }
         
-    }
+        
+    
     
     /*Consulta de todos los departamentos*/
     @Override
@@ -105,6 +129,56 @@ public class EmpleadoDAO implements IEmpleadoDAO{
     @Override
     public Empleado consultarPorId(String id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+ private List<CuentaMoral> consultarCuentasPorDepartamento(String clabeMoral) throws PersistenciaException{
+        try {
+            Connection conexion = this.conexion.crearConexion();
+            List<CuentaMoral> resultados  = new ArrayList<>();
+            CuentaMoral cuentaMoral = new CuentaMoral();
+            String consultaCuentaMoral =  """
+                                           select SaldoPresupuestal as SaldoCuenta, nombrebanco as Banco
+                                           from CuentaMoral
+                                           where clabeMoral = ?;
+                                           """;
+            
+            PreparedStatement cuentaMoral1 = conexion.prepareStatement(consultaCuentaMoral);
+            cuentaMoral1.setString(0, clabeMoral);
+            ResultSet InfoCuenta = cuentaMoral1.executeQuery();
+            
+            while(InfoCuenta.next()){
+                cuentaMoral.setNombrebanco(InfoCuenta.getNString("NombreBanco"));
+                cuentaMoral.setNumeroCuenta(InfoCuenta.getNString("clabeMoral"));
+                cuentaMoral.setSaldoPresupuesto(InfoCuenta.getNString("cuentaMoral"));
+                resultados.add(cuentaMoral);
+            }
+            return resultados;
+        } catch (SQLException ex) {
+            throw new PersistenciaException("Error al consultar cuentas: "+ ex.getMessage());
+        }     
+    }
+    
+    private Departamento consultarDepartamentoEmpleado(String idDepartamento) throws PersistenciaException{
+        try {
+            Connection conexion = this.conexion.crearConexion();
+            Departamento depa = new Departamento();
+            String consultaDepartamento =  """
+                                               select nombre, clabeMoral
+                                               from Departamento
+                                               where idDepartamento = ?;
+                                               """;
+            PreparedStatement departamento = conexion.prepareStatement(consultaDepartamento);
+            departamento.setString(0, idDepartamento);
+            ResultSet InfoDepartamento = departamento.executeQuery();
+            while(InfoDepartamento.next()){
+                depa.setNombre(InfoDepartamento.getNString("Nombre"));
+                depa.setlistaMoral(consultarCuentasPorDepartamento(InfoDepartamento.getNString("idDepartamento")));
+                depa.setSaldoPresupuesto(InfoDepartamento.getNString("cuentaMoral"));
+                return depa;
+            }
+        } catch (SQLException ex) {
+            throw new PersistenciaException("Error al consultar Departamento: "+ ex.getMessage());
+        }
+        return null;       
     }
 
 }
